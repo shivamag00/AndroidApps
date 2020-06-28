@@ -122,7 +122,7 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexV
             List<Pokemon> filteredPokemon = new ArrayList<>();
             for (Pokemon iter : pokemon)
             {
-                if (iter.getName().contains(constraint))
+                if (iter.getName().toLowerCase().contains(constraint.toString().toLowerCase()))
                     filteredPokemon.add(iter);
             }
 
