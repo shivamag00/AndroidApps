@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexViewHolder> implements Filterable {
@@ -55,6 +56,7 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexV
 
     private List<Pokemon> pokemon = new ArrayList<>();
     private RequestQueue requestQueue;
+    private List<Pokemon> filtered = pokemon;
 
     PokedexAdapter(Context context) {
         requestQueue = Volley.newRequestQueue(context);
@@ -103,24 +105,40 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexV
 
     @Override
     public void onBindViewHolder(@NonNull PokedexViewHolder holder, int position) {
-        Pokemon current = pokemon.get(position);
+        Pokemon current = filtered.get(position);
         holder.textView.setText(current.getName());
         holder.containerView.setTag(current);
     }
 
     @Override
     public int getItemCount() {
-        return pokemon.size();
+        return filtered.size();
     }
 
     private class PokemonFilter extends Filter {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             // implement your search here!
+            List<Pokemon> filteredPokemon = new ArrayList<>();
+            for (Pokemon iter : pokemon)
+            {
+                if (iter.getName().contains(constraint))
+                    filteredPokemon.add(iter);
+            }
+
+
+            FilterResults results = new FilterResults();
+            results.values = filteredPokemon; // you need to create this variable!
+            results.count = filteredPokemon.size();
+            return results;
         }
+
+
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
+            filtered = (List<Pokemon>) results.values;
+            notifyDataSetChanged();
         }
     }
 
