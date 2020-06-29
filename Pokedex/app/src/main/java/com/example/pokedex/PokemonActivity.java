@@ -31,8 +31,11 @@ public class PokemonActivity extends AppCompatActivity {
     private TextView numberTextView;
     private TextView type1TextView;
     private TextView type2TextView;
+    private TextView descTextView;
+
     private String url;
     private String image_url;
+    private String desc_url;
     private String name;
     private RequestQueue requestQueue;
     private Catcher preferences;
@@ -62,6 +65,8 @@ public class PokemonActivity extends AppCompatActivity {
         numberTextView = findViewById(R.id.pokemon_number);
         type1TextView = findViewById(R.id.pokemon_type1);
         type2TextView = findViewById(R.id.pokemon_type2);
+        descTextView = findViewById(R.id.pokemon_desc);
+
         imageView = findViewById(R.id.pokemon_image);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +81,7 @@ public class PokemonActivity extends AppCompatActivity {
     public void load() {
         type1TextView.setText("");
         type2TextView.setText("");
+        descTextView.setText("");
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -98,9 +104,13 @@ public class PokemonActivity extends AppCompatActivity {
                         }
                     }
 
+                    JSONObject descEntry = response.getJSONObject("species");
+                    desc_url = descEntry.getString("url");
+
                     JSONObject imageEntry = response.getJSONObject("sprites");
                     image_url = imageEntry.getString("front_default");
                     new DownloadSpriteTask().execute(image_url);
+                    load_desc();
                 } catch (JSONException e) {
                     Log.e("cs50", "Pokemon json error", e);
                 }
@@ -113,6 +123,35 @@ public class PokemonActivity extends AppCompatActivity {
         });
 
         requestQueue.add(request);
+
+    }
+
+    public void load_desc() {
+
+
+        JsonObjectRequest requestdesc = new JsonObjectRequest(Request.Method.GET, desc_url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    descTextView.setText(desc_url);
+                    JSONArray descEntries = response.getJSONArray("flavor_text_entries");
+                    for (int i = 0; i < 1; i++) {
+                        JSONObject descEntry = descEntries.getJSONObject(i);
+                        String descs = descEntry.getString("flavor_text");
+                        descTextView.setText(descs);
+                    }
+                } catch (JSONException e) {
+                    Log.e("cs50", "Pokemon json error", e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("cs50", "Pokemon details error", error);
+            }
+        });
+
+        requestQueue.add(requestdesc);
     }
 
     private void performLogin() {

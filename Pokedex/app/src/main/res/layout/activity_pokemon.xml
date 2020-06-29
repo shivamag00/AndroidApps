@@ -40,6 +40,12 @@
         android:textAlignment="center"
         android:textSize="16dp"
         android:paddingTop="5dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingTop="5dp"
+        android:id="@+id/pokemon_desc"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
