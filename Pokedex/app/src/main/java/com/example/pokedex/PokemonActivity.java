@@ -1,9 +1,11 @@
 package com.example.pokedex;
-
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -16,26 +18,46 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 public class PokemonActivity extends AppCompatActivity {
     private TextView nameTextView;
     private TextView numberTextView;
     private TextView type1TextView;
     private TextView type2TextView;
     private String url;
+    private String name;
     private RequestQueue requestQueue;
+    private Catcher preferences;
+    Button button;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon);
 
+        button=findViewById(R.id.caught_button);
+        name = getIntent().getStringExtra("name");
+        preferences = new Catcher(this,name);
+        if (preferences.isCaught()) {
+            button.setText("Release");
+        }
+        else
+            button.setText("Caught");
+
+
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         url = getIntent().getStringExtra("url");
+
+
         nameTextView = findViewById(R.id.pokemon_name);
         numberTextView = findViewById(R.id.pokemon_number);
         type1TextView = findViewById(R.id.pokemon_type1);
         type2TextView = findViewById(R.id.pokemon_type2);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                performLogin();
+            }
+        });
 
         load();
     }
@@ -76,5 +98,19 @@ public class PokemonActivity extends AppCompatActivity {
         });
 
         requestQueue.add(request);
+    }
+
+    private void performLogin() {
+        if (preferences.isCaught())
+        {
+            preferences.setCaught(false);
+            button.setText("Caught");
+        }
+        else
+        {
+            preferences.setCaught(true);
+            button.setText("Release");
+        }
+
     }
 }

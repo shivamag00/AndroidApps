@@ -47,6 +47,7 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexV
                     Pokemon current = (Pokemon) containerView.getTag();
                     Intent intent = new Intent(v.getContext(), PokemonActivity.class);
                     intent.putExtra("url", current.getUrl());
+                    intent.putExtra("name",current.getName());
 
                     v.getContext().startActivity(intent);
                 }
