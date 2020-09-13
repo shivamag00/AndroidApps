@@ -9,4 +9,16 @@ public class Earthquake {
         this.city = city;
         this.date = date;
     }
+
+    public String getMagnitude() {
+        return this.magnitude;
+    }
+
+    public String getCity() {
+        return this.city;
+    }
+
+    public String getDate() {
+        return this.date;
+    }
 }

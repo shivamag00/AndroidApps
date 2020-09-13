@@ -10,6 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60bdad7a-f4e8-4750-8fa4-790c523191ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/quakereport/EarthquakeAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/earthquake_list_item.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/quakereport/Earthquake.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/quakereport/Earthquake.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/quakereport/EarthquakeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/quakereport/EarthquakeActivity.java" afterDir="false" />
@@ -34,6 +36,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="layoutResourceFile_vertical" />
         <option value="Class" />
       </list>
     </option>
@@ -130,6 +133,10 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.md" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="263" y="118" key="AndroidCreateResourceFileDialog" timestamp="1600014334409">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="263" y="118" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1600014334409" />
     <state width="1322" height="174" key="GridCell.Tab.0.bottom" timestamp="1599898167010">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -154,5 +161,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="378" y="186" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1600010835467" />
+    <state x="339" y="157" key="run.anything.popup" timestamp="1600014519776">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="157" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1600014519776" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1600014626711">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1600014626711" />
   </component>
 </project>
