@@ -32,7 +32,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         magnitude.setText(currentEarthquake.getMagnitude());
 
         String location = currentEarthquake.getCity();
-        int splitIndex = location.indexOf(" OF ");
+        int splitIndex = location.indexOf(" of ");
         String offset;
         String primaryLocation;
         if (splitIndex != -1)
