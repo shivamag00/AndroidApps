@@ -14,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Weather weather = QueryUtils.fetchWeather();
-        cityView.setText(weather.getCity());
-        temperatureView.setText(weather.getTemperature());
+        if (weather!=null) {
+            cityView.setText(weather.getCity());
+            temperatureView.setText(weather.getTemperature());
+        }
     }
 }

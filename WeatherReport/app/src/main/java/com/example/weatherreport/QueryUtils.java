@@ -16,7 +16,7 @@ import java.nio.charset.Charset;
 
 public class QueryUtils {
 
-    private static final String LOG_TAG = "Network" ;
+    private static final String LOG_TAG = "HTTPQuery" ;
     private static final String API_KEY = "547c40b7111b0072aedabd5e13422b0b";
     private static String location = "Surat";
     private static final String OWM_REQUEST_URL = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+API_KEY ;
@@ -32,6 +32,7 @@ public class QueryUtils {
     private QueryUtils(){
     }
 
+//    Method to create url object
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -41,6 +42,8 @@ public class QueryUtils {
         }
         return url;
     }
+
+//    Method to connect to API and receive data
     private static String makeHttpRequest() throws IOException {
         URL url = createUrl(OWM_REQUEST_URL);
         String jsonResponse = "";
@@ -65,8 +68,11 @@ public class QueryUtils {
             }
         } catch (IOException e) {
             // TODO: Handle the exception
-            Log.e(LOG_TAG, "Problem retrieving the weather JSON results.", e);
-        } finally {
+            Log.e(LOG_TAG, "Problem retrieving the weather JSON response.", e);
+        } catch (android.os.NetworkOnMainThreadException nex) {
+            Log.e(LOG_TAG,"Network calls should be made on background thread ",nex);
+        }
+        finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
             }
@@ -79,6 +85,8 @@ public class QueryUtils {
         }
         return jsonResponse;
     }
+
+//    Method to parse response received from API
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -92,30 +100,35 @@ public class QueryUtils {
         }
         return output.toString();
     }
-    //Parse inputStream
+
+//    Method to store data in a Weather Object
     private static Weather extractWeatherfromJSON(String responseFromAPI){
+        Weather currentWeather = null;
         try {
             JSONObject root = new JSONObject(responseFromAPI);
             city = root.optString("name");
 
             JSONObject main = root.getJSONObject("main");
             temp = main.optString("temp");
+            currentWeather = new Weather(city,temp);
         }
         catch (JSONException e) {
             Log.e(LOG_TAG, "Error Parsing JSON");
         }
 
-        return new Weather(city,temp);
+        return currentWeather;
     }
 
+//    Driver Method
     public static Weather fetchWeather() {
-        createUrl(OWM_REQUEST_URL);
+        Weather currentWeather = null;
         try {
             JSONresponse = makeHttpRequest();
+            currentWeather = extractWeatherfromJSON(JSONresponse);
         }
         catch (IOException e) {
             Log.e(LOG_TAG,"Error Fetching Response");
         }
-        return extractWeatherfromJSON(JSONresponse);
+        return currentWeather;
     }
 }
