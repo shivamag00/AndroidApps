@@ -39,4 +39,5 @@ After implementing the class, the app runs smoothly. One problem is that the API
 So now I wanted to convert temperature from kelvin scale to celsius scale. It is simple. We can simply create a method to achieve this. But the important question to ask is where to implement this method. I can implement this method in ``QueryUtils`` class or in ``MainActivity`` class. The better location is to implement this method in ``MainActivity`` because in future, if someone wants to display the information in Fahrenheit, one would have to change code in MainActivity only.
 
 **Advanced Information**
+
 Suppose the app were displaying weather info of my cities in a list format. And, If I were using ``ListView`` with ``ArrayAdapter``, I would have called the ``kelvinToCelsius`` method in ``getView`` function of adapter class because we need to convert only those temperatures which are currently visible to the user. This would be more efficient for the hardware.
