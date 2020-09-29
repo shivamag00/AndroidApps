@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private TextView cityView;
     private TextView temperatureView;
+    private final float KELVIN_CONSTANT = (float) 273.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Weather weather) {
             if (weather!=null) {
                 cityView.setText(weather.getCity());
-                temperatureView.setText(weather.getTemperature());
+                temperatureView.setText(kelvinToCelsius(weather.getTemperature())+"\u2103");
             }
         }
+    }
+
+    public String kelvinToCelsius(String kelvin) {
+        float celsius = (float) Float.parseFloat(kelvin);
+        celsius = (float) (celsius - KELVIN_CONSTANT);
+        return String.valueOf(Math.round((celsius)));
     }
 }

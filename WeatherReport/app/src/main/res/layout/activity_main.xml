@@ -13,7 +13,7 @@
         android:paddingTop="20dp"
         android:textColor="@color/colorWhite"
         android:textSize="30dp"
-        android:text="Surat" />
+        android:text="" />
 
 
     <TextView
@@ -23,6 +23,6 @@
         android:layout_centerInParent="true"
         android:textColor="@color/colorWhite"
         android:textSize="60dp"
-        android:text="39&#xb0;C" />
+        android:text="Locating..." />
 
 </RelativeLayout>
