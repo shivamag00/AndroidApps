@@ -18,7 +18,7 @@ public class QueryUtils {
 
     private static final String LOG_TAG = "HTTPQuery" ;
     private static final String API_KEY = "547c40b7111b0072aedabd5e13422b0b";
-    private static String location = "Surat";
+    private static String location = "Bareilly";
     private static final String OWM_REQUEST_URL = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+API_KEY ;
     private static String JSONresponse;
     private static String temp;

@@ -25,4 +25,10 @@ Now, I created a new class called ``QueryUtils`` which contained all the methods
 4. Fetch the relevant details i.e. City and Temperature from the String (obtained from Step 3) (The string contains the data in JSON format). 
 
 Also, remember to add Internet Permission in AndroidManifest.xml.
+
+### And Crash
+If I try to run the app, it crashes as soon as it starts. On checking the logs in Android Studio, I found out that the app crashed because an ``NetworkOnMainThread Exception`` was thrown as soon as the app starts.
+
+On Searching about this error on the internet, I realised that Android Platform does not allow network calls on Main Thread to ensure a smooth UI Experience for the user. 
  
+On further searching on the internet, I found that we use ``AsyncTask`` to execute network calls on a background thread.
