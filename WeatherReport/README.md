@@ -19,10 +19,25 @@ Now that the UI is created, it is time for our app to fetch data from an API. On
 ``https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}``
 
 Now, I created a new class called ``QueryUtils`` which contained all the methods for making an HTTP request and parsing the JSON response obtained. The QueryClass had the methods to perform the following functions:-
-1. Create an URL object.
+1. Create an URL object (For now, I hardcoded the city name).
 2. Establishing connection to API and obtain the response
 3. Parse the response (obtained from API) to String. (The response of the API is in binary, hence we must convert it to ASCII characters.)
 4. Fetch the relevant details i.e. City and Temperature from the String (obtained from Step 3) (The string contains the data in JSON format). 
 
 Also, remember to add Internet Permission in AndroidManifest.xml.
+
+### And Crash...
+If I try to run the app, it crashes as soon as it starts. On checking the logs in Android Studio, I found out that the app crashed because an ``NetworkOnMainThread Exception`` was thrown as soon as the app starts.
+
+On Searching about this error on the internet, I realised that Android Platform does not allow network calls on Main Thread to ensure a smooth UI Experience for the user. 
  
+On further searching on the internet, I found that we can use the class ``AsyncTask`` to execute network calls on a background thread. It is an abstract class. 
+
+After implementing the class, the app runs smoothly. One problem is that the API sends temperature in Kelvin.
+
+### Converting to Kelvin Scale 
+So now I wanted to convert temperature from kelvin scale to celsius scale. It is simple. We can simply create a method to achieve this. But the important question to ask is where to implement this method. I can implement this method in ``QueryUtils`` class or in ``MainActivity`` class. The better location is to implement this method in ``MainActivity`` because in future, if someone wants to display the information in Fahrenheit, one would have to change code in MainActivity only.
+
+**Advanced Information**
+
+Suppose the app were displaying weather info of my cities in a list format. And, If I were using ``ListView`` with ``ArrayAdapter``, I would have called the ``kelvinToCelsius`` method in ``getView`` function of adapter class because we need to convert only those temperatures which are currently visible to the user. This would be more efficient for the hardware.
