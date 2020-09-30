@@ -9,14 +9,12 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
