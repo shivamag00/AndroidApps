@@ -19,8 +19,9 @@ public class QueryUtils {
 
     private static final String LOG_TAG = "HTTPQuery" ;
     private static final String API_KEY = "547c40b7111b0072aedabd5e13422b0b";
-    private static String location = "Bareilly";
-    private static final String OWM_REQUEST_URL = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+API_KEY ;
+    private static final String OWM_REQUEST_URL = "https://api.openweathermap.org/data/2.5/weather";
+    private static final String OWM_QUERY_1 = "?lat=";
+    private static final String OWM_QUERY_2 = "&lon=";
     private static String JSONresponse;
     private static String temp;
     private static String city;
@@ -34,7 +35,8 @@ public class QueryUtils {
     }
 
 //    Method to create url object
-    private static URL createUrl(String stringUrl) {
+    private static URL createUrl(String latitude, String longitude) {
+        String stringUrl = OWM_REQUEST_URL+OWM_QUERY_1+latitude+OWM_QUERY_2+longitude+"&appid="+API_KEY ;
         URL url = null;
         try {
             url = new URL(stringUrl);
@@ -45,8 +47,8 @@ public class QueryUtils {
     }
 
 //    Method to connect to API and receive data
-    private static String makeHttpRequest() throws IOException {
-        URL url = createUrl(OWM_REQUEST_URL);
+    private static String makeHttpRequest(String latitude, String longitude) throws IOException {
+        URL url = createUrl(latitude, longitude);
         String jsonResponse = "";
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
@@ -121,10 +123,10 @@ public class QueryUtils {
     }
 
 //    Driver Method
-    public static Weather fetchWeather() {
+    public static Weather fetchWeather(String latitude, String longitude) {
         Weather currentWeather = null;
         try {
-            JSONresponse = makeHttpRequest();
+            JSONresponse = makeHttpRequest(latitude, longitude);
             currentWeather = extractWeatherfromJSON(JSONresponse);
         }
         catch (IOException e) {

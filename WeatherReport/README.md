@@ -41,3 +41,6 @@ So now I wanted to convert temperature from kelvin scale to celsius scale. It is
 **Advanced Information**
 
 Suppose the app were displaying weather info of my cities in a list format. And, If I were using ``ListView`` with ``ArrayAdapter``, I would have called the ``kelvinToCelsius`` method in ``getView`` function of adapter class because we need to convert only those temperatures which are currently visible to the user. This would be more efficient for the hardware.
+
+### Fetching Location
+Now it is time to add location detection feature to this app. I googled **'Current Location Android Developers'**. I first opened Android Developer docs by Google and then I found one article on geeksforgeeks. With the help of these two articles, I addded the code to fetch the current location of the android device.
