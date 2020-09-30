@@ -37,7 +37,6 @@ public class QueryUtils {
 //    Method to create url object
     private static URL createUrl(String latitude, String longitude) {
         String stringUrl = OWM_REQUEST_URL+OWM_QUERY_1+latitude+OWM_QUERY_2+longitude+"&appid="+API_KEY ;
-        Log.e("Loc", stringUrl);
         URL url = null;
         try {
             url = new URL(stringUrl);

@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected Weather doInBackground(String... location) {
-            Log.e("Loc", location[0]);
             Weather weather = QueryUtils.fetchWeather(location[0], location[1]);
             return weather;
         }
@@ -178,10 +177,6 @@ public class MainActivity extends AppCompatActivity {
                     .getLastLocation();
             latitude =  String.valueOf(mLastLocation.getLatitude());
             longitude = String.valueOf(mLastLocation.getLongitude());
-            Log.e("Location", latitude);
-            Log.e("Location", longitude);
-
-            Log.e("location", "Calling API");
             networkTask.execute(latitude, longitude);
         }
     };
